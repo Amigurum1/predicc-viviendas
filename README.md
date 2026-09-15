@@ -1,5 +1,7 @@
 # Predictor de precios de viviendas — Ames Housing
 
+[![CI](https://github.com/Amigurum1/predicc-viviendas/actions/workflows/ci.yml/badge.svg)](https://github.com/Amigurum1/predicc-viviendas/actions/workflows/ci.yml)
+
 Aplicación web completa que predice el precio de una vivienda con Machine
 Learning: modelo entrenado, API REST con autenticación JWT, base de datos,
 historial, estadísticas e interfaz visual con mapas y gráficos.
