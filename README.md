@@ -295,5 +295,9 @@ comprobaciones estáticas de HTML y JavaScript) ni la imagen Docker.
 
 ## Licencia
 
-Proyecto con fines educativos y de portafolio. El dataset Ames Housing es de
-dominio público (Dean De Cock, 2011).
+El código se publica bajo licencia **MIT** (ver `LICENSE`). Es un proyecto con
+fines educativos y de portafolio.
+
+El dataset Ames Housing proviene del trabajo de Dean De Cock (2011) y se
+distribuye públicamente con fines académicos: no es propiedad de este proyecto.
+Los artefactos de `models_saved/` se derivan de él.
