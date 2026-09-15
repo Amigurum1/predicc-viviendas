@@ -1,0 +1,80 @@
+# ============================================================
+# INTEGRACIÓN CONTINUA
+# ============================================================
+# Se ejecuta en cada push a main y en cada pull request. Comprueba tres cosas,
+# en este orden, porque cada una depende de la anterior:
+#
+#   1. Que las dependencias fijadas se instalan en un entorno limpio.
+#   2. Que el modelo se puede REGENERAR desde los datos versionados. Los .pkl de
+#      models_saved/ no están en el repositorio (son binarios de varios MB), así
+#      que en un clon recién hecho no existen: sin este paso, 13 tests fallan al
+#      cargar el modelo y la suite no es fiable.
+#   3. Que la suite completa pasa y que el contrato de características sigue
+#      coincidiendo con el modelo entrenado.
+#
+# El orden importa: entrenar antes de los tests es lo que convierte el clon en un
+# entorno equivalente al de producción.
+#
+# Nota sobre las dependencias: se instala requirements-dev.txt (el entorno de
+# desarrollo documentado en el README), no solo requirements.txt. Cuesta algo más
+# porque arrastra matplotlib/seaborn/xgboost/jupyterlab, que la suite no usa,
+# pero a cambio comprueba que el fichero que seguirá un colaborador instala sin
+# errores.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Un push nuevo sobre la misma rama cancela la ejecución anterior, que ya es
+# irrelevante. No se cancela en main para no perder el histórico de la rama
+# principal.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  tests:
+    name: Tests (Python 3.12)
+    runs-on: ubuntu-latest
+
+    # El `env` no se versiona (.gitignore), así que en CI no existe `.env` y rige
+    # el valor por defecto de api/config.py, que es un secreto de ejemplo. Se
+    # define aquí uno de longitud suficiente y que NO está en la lista de
+    # SECRETOS_DEBILES. No es un secreto real: solo vive durante el job.
+    #
+    # ENVIRONMENT=testing en lugar de production: la suite arranca la app y en
+    # producción el arranque es estricto con los secretos.
+    env:
+      ENVIRONMENT: testing
+      SECRET_KEY: secret-key-solo-para-ci-0123456789abcdefghijklmnop
+
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Regenerar los artefactos del modelo
+        run: python src/models/train_model.py
+
+      - name: Comprobar artefactos y contrato
+        run: python scripts/check_artifacts.py
+
+      - name: Ejecutar la suite de pruebas
+        run: pytest -q

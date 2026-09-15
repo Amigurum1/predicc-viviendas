@@ -21,7 +21,7 @@ def test_config_database_url():
     assert db_url is not None
     assert isinstance(db_url, str)
 
-def test_config_secret_key_siempre_comprobada():
+def test_config_secret_key_siempre_comprobada(monkeypatch):
     """
     La SECRET_KEY se valida en TODOS los entornos, no solo en producción.
 
@@ -29,11 +29,38 @@ def test_config_secret_key_siempre_comprobada():
     'your-secret-key-here', así que la clave real del proyecto
     ('mi-clave-super-secreta-para-docker-2024', 39 caracteres) pasaba el filtro
     de longitud y no se detectaba nunca.
+
+    La prueba NO lee la SECRET_KEY real: en un clon recién hecho no hay `.env`
+    y rige el valor por defecto, que es débil, así que mirar el entorno daba un
+    fallo falso según la máquina. Aquí se fijan las claves a mano.
     """
-    assert config.SECRET_KEY not in config.SECRETOS_DEBILES, (
-        'La SECRET_KEY es un valor de ejemplo conocido'
-    )
-    assert len(config.SECRET_KEY) >= config.LONGITUD_MINIMA_SECRET_KEY
+    from api.config import Config
+
+    # La clave que provocó la regresión: es larga, así que el filtro de
+    # longitud por sí solo no la detectaba.
+    debil_larga = 'mi-clave-super-secreta-para-docker-2024'
+    assert len(debil_larga) >= Config.LONGITUD_MINIMA_SECRET_KEY
+    assert debil_larga in Config.SECRETOS_DEBILES
+
+    # Una clave de valor por defecto tampoco pasa el mínimo de longitud
+    assert len('your-secret-key-here') < Config.LONGITUD_MINIMA_SECRET_KEY
+
+    # Sin ser producción (estricto=False) sigue siendo un problema: se avisa
+    monkeypatch.setattr(Config, 'SECRET_KEY', debil_larga)
+    assert Config.validate_config(estricto=False) is False
+
+    # En modo estricto impide el arranque
+    with pytest.raises(RuntimeError, match='SECRET_KEY'):
+        Config.validate_config(estricto=True)
+
+    # Demasiado corta: también es un problema
+    monkeypatch.setattr(Config, 'SECRET_KEY', 'corta')
+    with pytest.raises(RuntimeError, match='demasiado corta'):
+        Config.validate_config(estricto=True)
+
+    # La longitud mínima exacta (y no listada) sí es válida
+    monkeypatch.setattr(Config, 'SECRET_KEY', 'x' * Config.LONGITUD_MINIMA_SECRET_KEY)
+    assert Config.validate_config(estricto=True) is True
 
 
 def test_config_rechaza_secretos_debiles():
