@@ -5,10 +5,10 @@
 # La aplicación se ejecuta como usuario SIN privilegios (`appuser`), pero el
 # contenedor arranca como root por un motivo concreto:
 #
-#   Los volúmenes de Docker (la base de datos en /app/data y las subidas en
-#   /app/uploads) pueden pertenecer a root si se crearon con una versión
-#   anterior de la imagen, que corría como root. Solo root puede corregir esa
-#   propiedad, y sin corregirla SQLite falla al escribir con:
+#   El volumen de Docker donde vive la base de datos (/app/data) puede pertenecer
+#   a root si se creó con una versión anterior de la imagen, que corría como
+#   root. Solo root puede corregir esa propiedad, y sin corregirla SQLite falla al
+#   escribir con:
 #
 #       sqlite3.OperationalError: attempt to write a readonly database
 #
@@ -21,11 +21,13 @@
 set -e
 
 if [ "$(id -u)" = "0" ]; then
-    mkdir -p /app/data /app/uploads
+    # Solo /app/data: es donde vive la base de datos. (Antes también se creaba
+    # /app/uploads, que ya no se usa: no hay endpoints de subida.)
+    mkdir -p /app/data
 
     # `|| true` porque un volumen de solo lectura no debe impedir el arranque:
     # en ese caso el error real aparecerá al escribir, con un mensaje más claro.
-    chown -R appuser:appuser /app/data /app/uploads 2>/dev/null || true
+    chown -R appuser:appuser /app/data 2>/dev/null || true
 
     exec setpriv --reuid=appuser --regid=appuser --init-groups "$@"
 fi
