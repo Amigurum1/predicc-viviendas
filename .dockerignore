@@ -1,0 +1,109 @@
+# ============================================
+# ARCHIVOS QUE NO VAN A LA IMAGEN
+# ============================================
+# Menos contexto de construcción = imagen más pequeña y builds más rápidos.
+# Lo que NO se excluye: api/, src/, main.py, models_saved/, data/raw/ y
+# data/processed/ (los necesita el reentrenamiento dentro del contenedor).
+
+# ------------------------------------------------------------
+# ENTORNOS VIRTUALES
+# ------------------------------------------------------------
+venv/
+env/
+.venv/
+.env/
+ENV/
+
+# ------------------------------------------------------------
+# CACHÉS DE PYTHON
+# ------------------------------------------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# ------------------------------------------------------------
+# PRUEBAS
+# ------------------------------------------------------------
+# La suite no se ejecuta dentro de la imagen de producción (ver Dockerfile.dev).
+tests/
+
+# ------------------------------------------------------------
+# SECRETOS Y CONFIGURACIÓN LOCAL
+# ------------------------------------------------------------
+# El .env real contiene la SECRET_KEY. Se monta en tiempo de ejecución
+# (ver docker-compose.yml), no se copia a la imagen.
+.env
+.env.local
+.env.*.local
+
+# ------------------------------------------------------------
+# BASES DE DATOS
+# ------------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+*.backup_*.db
+
+# ------------------------------------------------------------
+# INFORMES Y NOTEBOOKS
+# ------------------------------------------------------------
+# reports/ son 7 MB de figuras PNG que solo sirven para el repositorio.
+reports/
+notebooks/
+.ipynb_checkpoints/
+*.ipynb
+
+# ------------------------------------------------------------
+# DOCUMENTACIÓN
+# ------------------------------------------------------------
+README.md
+*.md
+docs/
+
+# ------------------------------------------------------------
+# SALIDAS DE PRUEBAS Y LOGS
+# ------------------------------------------------------------
+test_*_output.txt
+test_*_errors.txt
+*.log
+logs/
+
+# ------------------------------------------------------------
+# SUBIDAS DE USUARIO
+# ------------------------------------------------------------
+uploads/*
+!uploads/.gitkeep
+
+# ------------------------------------------------------------
+# CONTROL DE VERSIONES Y EDITORES
+# ------------------------------------------------------------
+.git/
+.gitignore
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ------------------------------------------------------------
+# SISTEMA
+# ------------------------------------------------------------
+.DS_Store
+Thumbs.db
+tmp/
+temp/
+
+# ------------------------------------------------------------
+# ARCHIVOS DE DOCKER
+# ------------------------------------------------------------
+Dockerfile
+Dockerfile.dev
+docker-compose.yml
+.dockerignore

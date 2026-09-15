@@ -1,0 +1,21 @@
+# ============================================
+# FINALES DE LÍNEA
+# ============================================
+# En Windows, `core.autocrlf=true` convierte los finales de línea a CRLF al
+# hacer checkout. Eso es correcto para el código Python, pero ROMPE dos cosas:
+#
+#   1. Los scripts de shell: Linux no entiende CRLF. `docker-entrypoint.sh` es el
+#      ENTRYPOINT de la imagen, así que con CRLF el contenedor falla al arrancar
+#      con un error confuso ("no such file or directory" o "\r: not found").
+#   2. Los Dockerfile: una barra de continuación de línea seguida de CR puede
+#      romper las instrucciones RUN.
+#
+# Estas reglas fuerzan LF en esos ficheros sea cual sea la configuración de git
+# de cada máquina.
+
+*.sh text eol=lf
+Dockerfile text eol=lf
+Dockerfile.dev text eol=lf
+
+# Normalizar el resto según cada plataforma
+* text=auto

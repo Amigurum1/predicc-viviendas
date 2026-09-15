@@ -1,0 +1,49 @@
+# ============================================
+# DEPENDENCIAS DE DESARROLLO Y NOTEBOOKS
+# ============================================
+# NO van a la imagen de producción. La imagen solo instala requirements.txt
+# (ver Dockerfile), así que matplotlib/seaborn/xgboost no engordan el runtime.
+#
+# Se necesitan para:
+#   * notebooks/01_eda_analysis.ipynb      -> matplotlib, seaborn
+#   * notebooks/02_model_training_ames.ipynb -> matplotlib, seaborn, xgboost
+#   * reports/figures/*.png                -> matplotlib
+#
+# El entrenamiento en sí NO las necesita: `src/models/train_model.py` solo usa
+# scikit-learn, joblib, numpy y pandas, que ya están en requirements.txt.
+#
+# Instalación:
+#   pip install -r requirements-dev.txt
+#
+# Versiones elegidas para que sean compatibles con los pins de requirements.txt
+# (numpy 1.26.4, pandas 2.2.2, scikit-learn 1.5.0) sobre Python 3.12.
+
+-r requirements.txt
+
+# ------------------------------------------------------------
+# PRUEBAS
+# ------------------------------------------------------------
+# httpx es lo que usa starlette.testclient por debajo para el TestClient.
+# Ninguno de estos paquetes está en la imagen de producción: la suite se ejecuta
+# en local o con Dockerfile.dev.
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+httpx==0.25.1
+
+# ------------------------------------------------------------
+# GRÁFICOS Y NOTEBOOKS
+# ------------------------------------------------------------
+# Gráficos (EDA y figuras de reports/)
+matplotlib==3.8.4
+seaborn==0.13.2
+
+# Comparativa de modelos del notebook 02 (no es el modelo desplegado)
+xgboost==2.0.3
+
+# Ejecución de notebooks
+jupyterlab==4.1.6
+
+# Nota: scipy no se fija aquí porque scikit-learn ya lo instala como dependencia
+# y fijarlo por separado puede provocar conflictos de versión.
+

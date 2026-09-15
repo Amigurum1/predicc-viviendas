@@ -1,0 +1,2147 @@
+{
+  "version": 1,
+  "descripcion": "Contrato de características derivado de data/raw/train.csv. Define la vivienda de referencia, las tablas one-hot y los rangos válidos para construir el vector de 213 características.",
+  "moneda": "USD",
+  "dataset": "Ames Housing (Iowa, EE. UU.)",
+  "n_registros_entrenamiento": 1460,
+  "precio_mediano": 163000.0,
+  "precio_medio": 180921.19589041095,
+  "precio_min": 34900.0,
+  "precio_max": 755000.0,
+  "feature_order": [
+    "MSSubClass",
+    "LotFrontage",
+    "LotArea",
+    "OverallQual",
+    "OverallCond",
+    "YearBuilt",
+    "YearRemodAdd",
+    "MasVnrArea",
+    "ExterQual",
+    "ExterCond",
+    "BsmtQual",
+    "BsmtCond",
+    "BsmtExposure",
+    "BsmtFinType1",
+    "BsmtFinSF1",
+    "BsmtFinType2",
+    "BsmtFinSF2",
+    "BsmtUnfSF",
+    "TotalBsmtSF",
+    "HeatingQC",
+    "1stFlrSF",
+    "2ndFlrSF",
+    "LowQualFinSF",
+    "GrLivArea",
+    "BsmtFullBath",
+    "BsmtHalfBath",
+    "FullBath",
+    "HalfBath",
+    "BedroomAbvGr",
+    "KitchenAbvGr",
+    "KitchenQual",
+    "TotRmsAbvGrd",
+    "Fireplaces",
+    "FireplaceQu",
+    "GarageYrBlt",
+    "GarageCars",
+    "GarageArea",
+    "GarageQual",
+    "GarageCond",
+    "WoodDeckSF",
+    "OpenPorchSF",
+    "EnclosedPorch",
+    "3SsnPorch",
+    "ScreenPorch",
+    "PoolArea",
+    "MiscVal",
+    "MoSold",
+    "YrSold",
+    "HouseAge",
+    "YearsSinceRemodel",
+    "GarageAge",
+    "IsRemodeled",
+    "LivArea_Qual",
+    "Bsmt_Qual",
+    "TotalSF",
+    "Qual_Cond",
+    "Age_Qual",
+    "TotalPorchSF",
+    "GrLivArea_sq",
+    "OverallQual_sq",
+    "TotalBsmtSF_sq",
+    "HouseAge_sq",
+    "MSZoning_FV",
+    "MSZoning_RH",
+    "MSZoning_RL",
+    "MSZoning_RM",
+    "Street_Pave",
+    "LotShape_IR2",
+    "LotShape_IR3",
+    "LotShape_Reg",
+    "LandContour_HLS",
+    "LandContour_Low",
+    "LandContour_Lvl",
+    "Utilities_NoSeWa",
+    "LotConfig_CulDSac",
+    "LotConfig_FR2",
+    "LotConfig_FR3",
+    "LotConfig_Inside",
+    "LandSlope_Mod",
+    "LandSlope_Sev",
+    "Neighborhood_Blueste",
+    "Neighborhood_BrDale",
+    "Neighborhood_BrkSide",
+    "Neighborhood_ClearCr",
+    "Neighborhood_CollgCr",
+    "Neighborhood_Crawfor",
+    "Neighborhood_Edwards",
+    "Neighborhood_Gilbert",
+    "Neighborhood_IDOTRR",
+    "Neighborhood_MeadowV",
+    "Neighborhood_Mitchel",
+    "Neighborhood_NAmes",
+    "Neighborhood_NPkVill",
+    "Neighborhood_NWAmes",
+    "Neighborhood_NoRidge",
+    "Neighborhood_NridgHt",
+    "Neighborhood_OldTown",
+    "Neighborhood_SWISU",
+    "Neighborhood_Sawyer",
+    "Neighborhood_SawyerW",
+    "Neighborhood_Somerst",
+    "Neighborhood_StoneBr",
+    "Neighborhood_Timber",
+    "Neighborhood_Veenker",
+    "Condition1_Feedr",
+    "Condition1_Norm",
+    "Condition1_PosA",
+    "Condition1_PosN",
+    "Condition1_RRAe",
+    "Condition1_RRAn",
+    "Condition1_RRNe",
+    "Condition1_RRNn",
+    "Condition2_Feedr",
+    "Condition2_Norm",
+    "Condition2_PosA",
+    "Condition2_PosN",
+    "Condition2_RRAe",
+    "Condition2_RRAn",
+    "Condition2_RRNn",
+    "BldgType_2fmCon",
+    "BldgType_Duplex",
+    "BldgType_Twnhs",
+    "BldgType_TwnhsE",
+    "HouseStyle_1.5Unf",
+    "HouseStyle_1Story",
+    "HouseStyle_2.5Fin",
+    "HouseStyle_2.5Unf",
+    "HouseStyle_2Story",
+    "HouseStyle_SFoyer",
+    "HouseStyle_SLvl",
+    "RoofStyle_Gable",
+    "RoofStyle_Gambrel",
+    "RoofStyle_Hip",
+    "RoofStyle_Mansard",
+    "RoofStyle_Shed",
+    "RoofMatl_Roll",
+    "RoofMatl_Tar&Grv",
+    "RoofMatl_WdShake",
+    "RoofMatl_WdShngl",
+    "Exterior1st_AsphShn",
+    "Exterior1st_BrkComm",
+    "Exterior1st_BrkFace",
+    "Exterior1st_CBlock",
+    "Exterior1st_CemntBd",
+    "Exterior1st_HdBoard",
+    "Exterior1st_ImStucc",
+    "Exterior1st_MetalSd",
+    "Exterior1st_Plywood",
+    "Exterior1st_Stone",
+    "Exterior1st_Stucco",
+    "Exterior1st_VinylSd",
+    "Exterior1st_Wd Sdng",
+    "Exterior1st_WdShing",
+    "Exterior2nd_AsphShn",
+    "Exterior2nd_Brk Cmn",
+    "Exterior2nd_BrkFace",
+    "Exterior2nd_CBlock",
+    "Exterior2nd_CmentBd",
+    "Exterior2nd_HdBoard",
+    "Exterior2nd_ImStucc",
+    "Exterior2nd_MetalSd",
+    "Exterior2nd_Other",
+    "Exterior2nd_Plywood",
+    "Exterior2nd_Stone",
+    "Exterior2nd_Stucco",
+    "Exterior2nd_VinylSd",
+    "Exterior2nd_Wd Sdng",
+    "Exterior2nd_Wd Shng",
+    "MasVnrType_BrkFace",
+    "MasVnrType_Stone",
+    "Foundation_CBlock",
+    "Foundation_PConc",
+    "Foundation_Slab",
+    "Foundation_Stone",
+    "Foundation_Wood",
+    "Heating_GasA",
+    "Heating_GasW",
+    "Heating_Grav",
+    "Heating_OthW",
+    "Heating_Wall",
+    "CentralAir_Y",
+    "Electrical_FuseF",
+    "Electrical_FuseP",
+    "Electrical_SBrkr",
+    "Functional_Maj2",
+    "Functional_Min1",
+    "Functional_Min2",
+    "Functional_Mod",
+    "Functional_Sev",
+    "Functional_Typ",
+    "GarageType_Attchd",
+    "GarageType_Basment",
+    "GarageType_BuiltIn",
+    "GarageType_CarPort",
+    "GarageType_Detchd",
+    "GarageFinish_RFn",
+    "GarageFinish_Unf",
+    "PavedDrive_P",
+    "PavedDrive_Y",
+    "SaleType_CWD",
+    "SaleType_Con",
+    "SaleType_ConLD",
+    "SaleType_ConLI",
+    "SaleType_ConLw",
+    "SaleType_New",
+    "SaleType_Oth",
+    "SaleType_WD",
+    "SaleCondition_AdjLand",
+    "SaleCondition_Alloca",
+    "SaleCondition_Family",
+    "SaleCondition_Normal",
+    "SaleCondition_Partial"
+  ],
+  "reference_row": {
+    "MSSubClass": 20.0,
+    "MSZoning": "RL",
+    "LotFrontage": 69.0,
+    "LotArea": 9444.5,
+    "Street": "Pave",
+    "LotShape": "Reg",
+    "LandContour": "Lvl",
+    "Utilities": "AllPub",
+    "LotConfig": "Inside",
+    "LandSlope": "Gtl",
+    "Neighborhood": "NAmes",
+    "Condition1": "Norm",
+    "Condition2": "Norm",
+    "BldgType": "1Fam",
+    "HouseStyle": "1Story",
+    "OverallQual": 6.0,
+    "OverallCond": 5.0,
+    "YearBuilt": 1972.5,
+    "YearRemodAdd": 1994.0,
+    "RoofStyle": "Gable",
+    "RoofMatl": "CompShg",
+    "Exterior1st": "VinylSd",
+    "Exterior2nd": "VinylSd",
+    "MasVnrType": "BrkFace",
+    "MasVnrArea": 0.0,
+    "ExterQual": 3.0,
+    "ExterCond": 3.0,
+    "Foundation": "PConc",
+    "BsmtQual": 4.0,
+    "BsmtCond": 3.0,
+    "BsmtExposure": 0.0,
+    "BsmtFinType1": 4.0,
+    "BsmtFinSF1": 376.5,
+    "BsmtFinType2": 1.0,
+    "BsmtFinSF2": 0.0,
+    "BsmtUnfSF": 481.5,
+    "TotalBsmtSF": 858.0,
+    "Heating": "GasA",
+    "HeatingQC": 4.0,
+    "CentralAir": "Y",
+    "Electrical": "SBrkr",
+    "1stFlrSF": 1083.5,
+    "2ndFlrSF": 0.0,
+    "LowQualFinSF": 0.0,
+    "GrLivArea": 1443.5,
+    "BsmtFullBath": 0.0,
+    "BsmtHalfBath": 0.0,
+    "FullBath": 2.0,
+    "HalfBath": 0.0,
+    "BedroomAbvGr": 3.0,
+    "KitchenAbvGr": 1.0,
+    "KitchenQual": 3.0,
+    "TotRmsAbvGrd": 6.0,
+    "Functional": "Typ",
+    "Fireplaces": 1.0,
+    "FireplaceQu": 4.0,
+    "GarageType": "Attchd",
+    "GarageYrBlt": 1980.0,
+    "GarageFinish": "Unf",
+    "GarageCars": 2.0,
+    "GarageArea": 480.0,
+    "GarageQual": 3.0,
+    "GarageCond": 3.0,
+    "PavedDrive": "Y",
+    "WoodDeckSF": 0.0,
+    "OpenPorchSF": 26.0,
+    "EnclosedPorch": 0.0,
+    "3SsnPorch": 0.0,
+    "ScreenPorch": 0.0,
+    "PoolArea": 0.0,
+    "MiscVal": 0.0,
+    "MoSold": 6.0,
+    "YrSold": 2008.0,
+    "SaleType": "WD",
+    "SaleCondition": "Normal",
+    "HouseAge": 35.0,
+    "YearsSinceRemodel": 14.0,
+    "GarageAge": 28.0,
+    "IsRemodeled": 0.0,
+    "LivArea_Qual": 8749.0,
+    "Bsmt_Qual": 5656.0,
+    "TotalSF": 2467.0,
+    "Qual_Cond": 35.0,
+    "Age_Qual": 186.0,
+    "TotalPorchSF": 48.0,
+    "GrLivArea_sq": 2083694.5,
+    "OverallQual_sq": 36.0,
+    "TotalBsmtSF_sq": 980100.0,
+    "HouseAge_sq": 1225.0
+  },
+  "reference_year": 2008,
+  "categorical": {
+    "MSZoning": {
+      "valores": [
+        "C (all)",
+        "FV",
+        "RH",
+        "RL",
+        "RM"
+      ],
+      "base": "C (all)",
+      "dummies": [
+        "MSZoning_FV",
+        "MSZoning_RH",
+        "MSZoning_RL",
+        "MSZoning_RM"
+      ]
+    },
+    "Street": {
+      "valores": [
+        "Grvl",
+        "Pave"
+      ],
+      "base": "Grvl",
+      "dummies": [
+        "Street_Pave"
+      ]
+    },
+    "LotShape": {
+      "valores": [
+        "IR1",
+        "IR2",
+        "IR3",
+        "Reg"
+      ],
+      "base": "IR1",
+      "dummies": [
+        "LotShape_IR2",
+        "LotShape_IR3",
+        "LotShape_Reg"
+      ]
+    },
+    "LandContour": {
+      "valores": [
+        "Bnk",
+        "HLS",
+        "Low",
+        "Lvl"
+      ],
+      "base": "Bnk",
+      "dummies": [
+        "LandContour_HLS",
+        "LandContour_Low",
+        "LandContour_Lvl"
+      ]
+    },
+    "Utilities": {
+      "valores": [
+        "AllPub",
+        "NoSeWa"
+      ],
+      "base": "AllPub",
+      "dummies": [
+        "Utilities_NoSeWa"
+      ]
+    },
+    "LotConfig": {
+      "valores": [
+        "Corner",
+        "CulDSac",
+        "FR2",
+        "FR3",
+        "Inside"
+      ],
+      "base": "Corner",
+      "dummies": [
+        "LotConfig_CulDSac",
+        "LotConfig_FR2",
+        "LotConfig_FR3",
+        "LotConfig_Inside"
+      ]
+    },
+    "LandSlope": {
+      "valores": [
+        "Gtl",
+        "Mod",
+        "Sev"
+      ],
+      "base": "Gtl",
+      "dummies": [
+        "LandSlope_Mod",
+        "LandSlope_Sev"
+      ]
+    },
+    "Neighborhood": {
+      "valores": [
+        "Blmngtn",
+        "Blueste",
+        "BrDale",
+        "BrkSide",
+        "ClearCr",
+        "CollgCr",
+        "Crawfor",
+        "Edwards",
+        "Gilbert",
+        "IDOTRR",
+        "MeadowV",
+        "Mitchel",
+        "NAmes",
+        "NPkVill",
+        "NWAmes",
+        "NoRidge",
+        "NridgHt",
+        "OldTown",
+        "SWISU",
+        "Sawyer",
+        "SawyerW",
+        "Somerst",
+        "StoneBr",
+        "Timber",
+        "Veenker"
+      ],
+      "base": "Blmngtn",
+      "dummies": [
+        "Neighborhood_Blueste",
+        "Neighborhood_BrDale",
+        "Neighborhood_BrkSide",
+        "Neighborhood_ClearCr",
+        "Neighborhood_CollgCr",
+        "Neighborhood_Crawfor",
+        "Neighborhood_Edwards",
+        "Neighborhood_Gilbert",
+        "Neighborhood_IDOTRR",
+        "Neighborhood_MeadowV",
+        "Neighborhood_Mitchel",
+        "Neighborhood_NAmes",
+        "Neighborhood_NPkVill",
+        "Neighborhood_NWAmes",
+        "Neighborhood_NoRidge",
+        "Neighborhood_NridgHt",
+        "Neighborhood_OldTown",
+        "Neighborhood_SWISU",
+        "Neighborhood_Sawyer",
+        "Neighborhood_SawyerW",
+        "Neighborhood_Somerst",
+        "Neighborhood_StoneBr",
+        "Neighborhood_Timber",
+        "Neighborhood_Veenker"
+      ]
+    },
+    "Condition1": {
+      "valores": [
+        "Artery",
+        "Feedr",
+        "Norm",
+        "PosA",
+        "PosN",
+        "RRAe",
+        "RRAn",
+        "RRNe",
+        "RRNn"
+      ],
+      "base": "Artery",
+      "dummies": [
+        "Condition1_Feedr",
+        "Condition1_Norm",
+        "Condition1_PosA",
+        "Condition1_PosN",
+        "Condition1_RRAe",
+        "Condition1_RRAn",
+        "Condition1_RRNe",
+        "Condition1_RRNn"
+      ]
+    },
+    "Condition2": {
+      "valores": [
+        "Artery",
+        "Feedr",
+        "Norm",
+        "PosA",
+        "PosN",
+        "RRAe",
+        "RRAn",
+        "RRNn"
+      ],
+      "base": "Artery",
+      "dummies": [
+        "Condition2_Feedr",
+        "Condition2_Norm",
+        "Condition2_PosA",
+        "Condition2_PosN",
+        "Condition2_RRAe",
+        "Condition2_RRAn",
+        "Condition2_RRNn"
+      ]
+    },
+    "BldgType": {
+      "valores": [
+        "1Fam",
+        "2fmCon",
+        "Duplex",
+        "Twnhs",
+        "TwnhsE"
+      ],
+      "base": "1Fam",
+      "dummies": [
+        "BldgType_2fmCon",
+        "BldgType_Duplex",
+        "BldgType_Twnhs",
+        "BldgType_TwnhsE"
+      ]
+    },
+    "HouseStyle": {
+      "valores": [
+        "1.5Fin",
+        "1.5Unf",
+        "1Story",
+        "2.5Fin",
+        "2.5Unf",
+        "2Story",
+        "SFoyer",
+        "SLvl"
+      ],
+      "base": "1.5Fin",
+      "dummies": [
+        "HouseStyle_1.5Unf",
+        "HouseStyle_1Story",
+        "HouseStyle_2.5Fin",
+        "HouseStyle_2.5Unf",
+        "HouseStyle_2Story",
+        "HouseStyle_SFoyer",
+        "HouseStyle_SLvl"
+      ]
+    },
+    "RoofStyle": {
+      "valores": [
+        "Flat",
+        "Gable",
+        "Gambrel",
+        "Hip",
+        "Mansard",
+        "Shed"
+      ],
+      "base": "Flat",
+      "dummies": [
+        "RoofStyle_Gable",
+        "RoofStyle_Gambrel",
+        "RoofStyle_Hip",
+        "RoofStyle_Mansard",
+        "RoofStyle_Shed"
+      ]
+    },
+    "RoofMatl": {
+      "valores": [
+        "CompShg",
+        "Roll",
+        "Tar&Grv",
+        "WdShake",
+        "WdShngl"
+      ],
+      "base": "CompShg",
+      "dummies": [
+        "RoofMatl_Roll",
+        "RoofMatl_Tar&Grv",
+        "RoofMatl_WdShake",
+        "RoofMatl_WdShngl"
+      ]
+    },
+    "Exterior1st": {
+      "valores": [
+        "AsbShng",
+        "AsphShn",
+        "BrkComm",
+        "BrkFace",
+        "CBlock",
+        "CemntBd",
+        "HdBoard",
+        "ImStucc",
+        "MetalSd",
+        "Plywood",
+        "Stone",
+        "Stucco",
+        "VinylSd",
+        "Wd Sdng",
+        "WdShing"
+      ],
+      "base": "AsbShng",
+      "dummies": [
+        "Exterior1st_AsphShn",
+        "Exterior1st_BrkComm",
+        "Exterior1st_BrkFace",
+        "Exterior1st_CBlock",
+        "Exterior1st_CemntBd",
+        "Exterior1st_HdBoard",
+        "Exterior1st_ImStucc",
+        "Exterior1st_MetalSd",
+        "Exterior1st_Plywood",
+        "Exterior1st_Stone",
+        "Exterior1st_Stucco",
+        "Exterior1st_VinylSd",
+        "Exterior1st_Wd Sdng",
+        "Exterior1st_WdShing"
+      ]
+    },
+    "Exterior2nd": {
+      "valores": [
+        "AsbShng",
+        "AsphShn",
+        "Brk Cmn",
+        "BrkFace",
+        "CBlock",
+        "CmentBd",
+        "HdBoard",
+        "ImStucc",
+        "MetalSd",
+        "Other",
+        "Plywood",
+        "Stone",
+        "Stucco",
+        "VinylSd",
+        "Wd Sdng",
+        "Wd Shng"
+      ],
+      "base": "AsbShng",
+      "dummies": [
+        "Exterior2nd_AsphShn",
+        "Exterior2nd_Brk Cmn",
+        "Exterior2nd_BrkFace",
+        "Exterior2nd_CBlock",
+        "Exterior2nd_CmentBd",
+        "Exterior2nd_HdBoard",
+        "Exterior2nd_ImStucc",
+        "Exterior2nd_MetalSd",
+        "Exterior2nd_Other",
+        "Exterior2nd_Plywood",
+        "Exterior2nd_Stone",
+        "Exterior2nd_Stucco",
+        "Exterior2nd_VinylSd",
+        "Exterior2nd_Wd Sdng",
+        "Exterior2nd_Wd Shng"
+      ]
+    },
+    "MasVnrType": {
+      "valores": [
+        "BrkCmn",
+        "BrkFace",
+        "Stone"
+      ],
+      "base": "BrkCmn",
+      "dummies": [
+        "MasVnrType_BrkFace",
+        "MasVnrType_Stone"
+      ]
+    },
+    "Foundation": {
+      "valores": [
+        "BrkTil",
+        "CBlock",
+        "PConc",
+        "Slab",
+        "Stone",
+        "Wood"
+      ],
+      "base": "BrkTil",
+      "dummies": [
+        "Foundation_CBlock",
+        "Foundation_PConc",
+        "Foundation_Slab",
+        "Foundation_Stone",
+        "Foundation_Wood"
+      ]
+    },
+    "Heating": {
+      "valores": [
+        "Floor",
+        "GasA",
+        "GasW",
+        "Grav",
+        "OthW",
+        "Wall"
+      ],
+      "base": "Floor",
+      "dummies": [
+        "Heating_GasA",
+        "Heating_GasW",
+        "Heating_Grav",
+        "Heating_OthW",
+        "Heating_Wall"
+      ]
+    },
+    "CentralAir": {
+      "valores": [
+        "N",
+        "Y"
+      ],
+      "base": "N",
+      "dummies": [
+        "CentralAir_Y"
+      ]
+    },
+    "Electrical": {
+      "valores": [
+        "FuseA",
+        "FuseF",
+        "FuseP",
+        "SBrkr"
+      ],
+      "base": "FuseA",
+      "dummies": [
+        "Electrical_FuseF",
+        "Electrical_FuseP",
+        "Electrical_SBrkr"
+      ]
+    },
+    "Functional": {
+      "valores": [
+        "Maj1",
+        "Maj2",
+        "Min1",
+        "Min2",
+        "Mod",
+        "Sev",
+        "Typ"
+      ],
+      "base": "Maj1",
+      "dummies": [
+        "Functional_Maj2",
+        "Functional_Min1",
+        "Functional_Min2",
+        "Functional_Mod",
+        "Functional_Sev",
+        "Functional_Typ"
+      ]
+    },
+    "GarageType": {
+      "valores": [
+        "2Types",
+        "Attchd",
+        "Basment",
+        "BuiltIn",
+        "CarPort",
+        "Detchd"
+      ],
+      "base": "2Types",
+      "dummies": [
+        "GarageType_Attchd",
+        "GarageType_Basment",
+        "GarageType_BuiltIn",
+        "GarageType_CarPort",
+        "GarageType_Detchd"
+      ]
+    },
+    "GarageFinish": {
+      "valores": [
+        "Fin",
+        "RFn",
+        "Unf"
+      ],
+      "base": "Fin",
+      "dummies": [
+        "GarageFinish_RFn",
+        "GarageFinish_Unf"
+      ]
+    },
+    "PavedDrive": {
+      "valores": [
+        "N",
+        "P",
+        "Y"
+      ],
+      "base": "N",
+      "dummies": [
+        "PavedDrive_P",
+        "PavedDrive_Y"
+      ]
+    },
+    "SaleType": {
+      "valores": [
+        "COD",
+        "CWD",
+        "Con",
+        "ConLD",
+        "ConLI",
+        "ConLw",
+        "New",
+        "Oth",
+        "WD"
+      ],
+      "base": "COD",
+      "dummies": [
+        "SaleType_CWD",
+        "SaleType_Con",
+        "SaleType_ConLD",
+        "SaleType_ConLI",
+        "SaleType_ConLw",
+        "SaleType_New",
+        "SaleType_Oth",
+        "SaleType_WD"
+      ]
+    },
+    "SaleCondition": {
+      "valores": [
+        "Abnorml",
+        "AdjLand",
+        "Alloca",
+        "Family",
+        "Normal",
+        "Partial"
+      ],
+      "base": "Abnorml",
+      "dummies": [
+        "SaleCondition_AdjLand",
+        "SaleCondition_Alloca",
+        "SaleCondition_Family",
+        "SaleCondition_Normal",
+        "SaleCondition_Partial"
+      ]
+    }
+  },
+  "garage_area_por_plaza": {
+    "0": 0.0,
+    "1": 288.0,
+    "2": 505.0,
+    "3": 792.0,
+    "4": 864.0
+  },
+  "ranges": {
+    "MSSubClass": {
+      "min": 20.0,
+      "max": 190.0,
+      "mean": 57.01526032315979
+    },
+    "LotFrontage": {
+      "min": 21.0,
+      "max": 182.0,
+      "mean": 69.0475763016158
+    },
+    "LotArea": {
+      "min": -2.453683000318234,
+      "max": 3.187145936330893,
+      "mean": 2.3599713844814815e-16
+    },
+    "OverallQual": {
+      "min": 1.0,
+      "max": 10.0,
+      "mean": 6.087073608617594
+    },
+    "OverallCond": {
+      "min": 1.0,
+      "max": 9.0,
+      "mean": 5.578994614003591
+    },
+    "YearBuilt": {
+      "min": 1872.0,
+      "max": 2010.0,
+      "mean": 1971.193895870736
+    },
+    "YearRemodAdd": {
+      "min": 1950.0,
+      "max": 2010.0,
+      "mean": 1984.7773788150807
+    },
+    "MasVnrArea": {
+      "min": 0.0,
+      "max": 1047.0,
+      "mean": 98.57719928186715
+    },
+    "ExterQual": {
+      "min": 2.0,
+      "max": 5.0,
+      "mean": 3.388689407540395
+    },
+    "ExterCond": {
+      "min": 1.0,
+      "max": 5.0,
+      "mean": 3.083482944344704
+    },
+    "BsmtQual": {
+      "min": 2.0,
+      "max": 5.0,
+      "mean": 3.5529622980251347
+    },
+    "BsmtCond": {
+      "min": 1.0,
+      "max": 4.0,
+      "mean": 3.009874326750449
+    },
+    "BsmtExposure": {
+      "min": 0.0,
+      "max": 3.0,
+      "mean": 0.6023339317773788
+    },
+    "BsmtFinType1": {
+      "min": 1.0,
+      "max": 6.0,
+      "mean": 3.535906642728905
+    },
+    "BsmtFinSF1": {
+      "min": 0.0,
+      "max": 1904.0,
+      "mean": 425.6543985637343
+    },
+    "BsmtFinType2": {
+      "min": 1.0,
+      "max": 6.0,
+      "mean": 1.2639138240574506
+    },
+    "BsmtFinSF2": {
+      "min": 0.0,
+      "max": 1127.0,
+      "mean": 44.319569120287255
+    },
+    "BsmtUnfSF": {
+      "min": 0.0,
+      "max": 2336.0,
+      "mean": 569.1104129263914
+    },
+    "TotalBsmtSF": {
+      "min": -2.637250587675316,
+      "max": 5.215483483328636,
+      "mean": 2.29618837409009e-16
+    },
+    "HeatingQC": {
+      "min": 1.0,
+      "max": 5.0,
+      "mean": 4.123877917414721
+    },
+    "1stFlrSF": {
+      "min": -2.3294816271696384,
+      "max": 3.625726770032287,
+      "mean": 1.7540327857632636e-16
+    },
+    "2ndFlrSF": {
+      "min": -0.8023101138139039,
+      "max": 3.011720583969725,
+      "mean": -6.537758565117618e-17
+    },
+    "LowQualFinSF": {
+      "min": 0.0,
+      "max": 528.0,
+      "mean": 4.644524236983842
+    },
+    "GrLivArea": {
+      "min": -2.524446159611356,
+      "max": 3.494984802791251,
+      "mean": -1.594575259784785e-16
+    },
+    "BsmtFullBath": {
+      "min": 0.0,
+      "max": 3.0,
+      "mean": 0.4111310592459605
+    },
+    "BsmtHalfBath": {
+      "min": 0.0,
+      "max": 2.0,
+      "mean": 0.05655296229802514
+    },
+    "FullBath": {
+      "min": 0.0,
+      "max": 3.0,
+      "mean": 1.5610412926391382
+    },
+    "HalfBath": {
+      "min": 0.0,
+      "max": 2.0,
+      "mean": 0.3761220825852783
+    },
+    "BedroomAbvGr": {
+      "min": 0.0,
+      "max": 6.0,
+      "mean": 2.86983842010772
+    },
+    "KitchenAbvGr": {
+      "min": 0.0,
+      "max": 3.0,
+      "mean": 1.0484739676840216
+    },
+    "KitchenQual": {
+      "min": 2.0,
+      "max": 5.0,
+      "mean": 3.495511669658887
+    },
+    "TotRmsAbvGrd": {
+      "min": 2.0,
+      "max": 12.0,
+      "mean": 6.481149012567325
+    },
+    "Fireplaces": {
+      "min": 0.0,
+      "max": 3.0,
+      "mean": 0.5861759425493717
+    },
+    "FireplaceQu": {
+      "min": 1.0,
+      "max": 5.0,
+      "mean": 3.712746858168761
+    },
+    "GarageYrBlt": {
+      "min": 1900.0,
+      "max": 2010.0,
+      "mean": 1978.8931777378816
+    },
+    "GarageCars": {
+      "min": 0.0,
+      "max": 4.0,
+      "mean": 1.7576301615798924
+    },
+    "GarageArea": {
+      "min": -2.278635862201219,
+      "max": 3.653660295123298,
+      "mean": -1.1799856922407408e-16
+    },
+    "GarageQual": {
+      "min": 1.0,
+      "max": 5.0,
+      "mean": 2.97935368043088
+    },
+    "GarageCond": {
+      "min": 1.0,
+      "max": 5.0,
+      "mean": 2.9784560143626573
+    },
+    "WoodDeckSF": {
+      "min": -0.7401696032247256,
+      "max": 5.245253347159091,
+      "mean": 4.0661669124512016e-17
+    },
+    "OpenPorchSF": {
+      "min": -0.7110027628414602,
+      "max": 7.39040566961888,
+      "mean": 1.275660207827828e-17
+    },
+    "EnclosedPorch": {
+      "min": -0.3591657766194219,
+      "max": 6.021973776719333,
+      "mean": -4.6242682533758764e-17
+    },
+    "3SsnPorch": {
+      "min": 0.0,
+      "max": 508.0,
+      "mean": 3.456912028725314
+    },
+    "ScreenPorch": {
+      "min": -0.2736183488824303,
+      "max": 8.556679406830838,
+      "mean": -1.594575259784785e-18
+    },
+    "PoolArea": {
+      "min": -0.0514499395494588,
+      "max": 22.152561452406303,
+      "mean": 6.856673617074575e-17
+    },
+    "MiscVal": {
+      "min": 0.0,
+      "max": 15500.0,
+      "mean": 52.675044883303414
+    },
+    "MoSold": {
+      "min": 1.0,
+      "max": 12.0,
+      "mean": 6.363554757630162
+    },
+    "YrSold": {
+      "min": 2006.0,
+      "max": 2010.0,
+      "mean": 2007.8222621184918
+    },
+    "HouseAge": {
+      "min": -1.1963145787876932,
+      "max": 3.2455647454121563,
+      "mean": -4.783725779354355e-18
+    },
+    "YearsSinceRemodel": {
+      "min": -1.1092480313265545,
+      "max": 1.7788065968234497,
+      "mean": 9.886366610665666e-17
+    },
+    "GarageAge": {
+      "min": -1.2053077040956477,
+      "max": 3.252763717780202,
+      "mean": 1.913490311741742e-17
+    },
+    "IsRemodeled": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.4793536804308797
+    },
+    "LivArea_Qual": {
+      "min": -2.0727863074012127,
+      "max": 4.198949290708085,
+      "mean": -5.102640831311312e-17
+    },
+    "Bsmt_Qual": {
+      "min": -1.8523133599190944,
+      "max": 6.827723629425548,
+      "mean": -1.1002569292515016e-16
+    },
+    "TotalSF": {
+      "min": -3.132832276499661,
+      "max": 4.246279070288515,
+      "mean": 3.3486080455480484e-17
+    },
+    "Qual_Cond": {
+      "min": -3.669168770901568,
+      "max": 6.283321023358851,
+      "mean": -3.2529335299609613e-16
+    },
+    "Age_Qual": {
+      "min": -1.1832924968322238,
+      "max": 5.647927446801511,
+      "mean": 9.726909084687188e-17
+    },
+    "TotalPorchSF": {
+      "min": 0.0,
+      "max": 1027.0,
+      "mean": 84.60592459605027
+    },
+    "GrLivArea_sq": {
+      "min": -1.5382413037408236,
+      "max": 4.722395510589569,
+      "mean": -7.972876298923925e-18
+    },
+    "OverallQual_sq": {
+      "min": -2.2612073207262413,
+      "max": 3.6537261621990753,
+      "mean": 1.4032262286106107e-16
+    },
+    "TotalBsmtSF_sq": {
+      "min": -1.3632923527313527,
+      "max": 9.20453345528374,
+      "mean": 5.979657224192944e-17
+    },
+    "HouseAge_sq": {
+      "min": -0.7609324506005503,
+      "max": 5.414459731753997,
+      "mean": 7.335046195010011e-17
+    },
+    "MSZoning_FV": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.04757630161579892
+    },
+    "MSZoning_RH": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.012567324955116697
+    },
+    "MSZoning_RL": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.7836624775583483
+    },
+    "MSZoning_RM": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.1526032315978456
+    },
+    "Street_Pave": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.9982046678635548
+    },
+    "LotShape_IR2": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.02154398563734291
+    },
+    "LotShape_IR3": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590664272890485
+    },
+    "LotShape_Reg": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.6373429084380611
+    },
+    "LandContour_HLS": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.026032315978456014
+    },
+    "LandContour_Low": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.012567324955116697
+    },
+    "LandContour_Lvl": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.9236983842010772
+    },
+    "Utilities_NoSeWa": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "LotConfig_CulDSac": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.06193895870736086
+    },
+    "LotConfig_FR2": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.03321364452423698
+    },
+    "LotConfig_FR3": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0026929982046678637
+    },
+    "LotConfig_Inside": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.7118491921005387
+    },
+    "LandSlope_Mod": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.03590664272890485
+    },
+    "LandSlope_Sev": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "Neighborhood_Blueste": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "Neighborhood_BrDale": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.011669658886894075
+    },
+    "Neighborhood_BrkSide": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.03949730700179533
+    },
+    "Neighborhood_ClearCr": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.008976660682226212
+    },
+    "Neighborhood_CollgCr": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.10323159784560143
+    },
+    "Neighborhood_Crawfor": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.03500897666068223
+    },
+    "Neighborhood_Edwards": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.07540394973070018
+    },
+    "Neighborhood_Gilbert": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.05655296229802514
+    },
+    "Neighborhood_IDOTRR": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.02333931777378815
+    },
+    "Neighborhood_MeadowV": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.008976660682226212
+    },
+    "Neighborhood_Mitchel": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.03141831238779174
+    },
+    "Neighborhood_NAmes": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.15978456014362658
+    },
+    "Neighborhood_NPkVill": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0062836624775583485
+    },
+    "Neighborhood_NWAmes": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.05655296229802514
+    },
+    "Neighborhood_NoRidge": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.02333931777378815
+    },
+    "Neighborhood_NridgHt": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.05296229802513465
+    },
+    "Neighborhood_OldTown": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.07989228007181329
+    },
+    "Neighborhood_SWISU": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.017953321364452424
+    },
+    "Neighborhood_Sawyer": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.05026929982046679
+    },
+    "Neighborhood_SawyerW": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.03859964093357271
+    },
+    "Neighborhood_Somerst": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.06104129263913824
+    },
+    "Neighborhood_StoneBr": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.017055655296229804
+    },
+    "Neighborhood_Timber": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.02064631956912029
+    },
+    "Neighborhood_Veenker": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.00718132854578097
+    },
+    "Condition1_Feedr": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.05565529622980251
+    },
+    "Condition1_Norm": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.8635547576301615
+    },
+    "Condition1_PosA": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0062836624775583485
+    },
+    "Condition1_PosN": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.010771992818671455
+    },
+    "Condition1_RRAe": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.008976660682226212
+    },
+    "Condition1_RRAn": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.01526032315978456
+    },
+    "Condition1_RRNe": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "Condition1_RRNn": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.004488330341113106
+    },
+    "Condition2_Feedr": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0026929982046678637
+    },
+    "Condition2_Norm": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.9910233393177738
+    },
+    "Condition2_PosA": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "Condition2_PosN": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "Condition2_RRAe": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "Condition2_RRAn": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "Condition2_RRNn": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "BldgType_2fmCon": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.02333931777378815
+    },
+    "BldgType_Duplex": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.03590664272890485
+    },
+    "BldgType_Twnhs": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.02872531418312388
+    },
+    "BldgType_TwnhsE": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.07899461400359066
+    },
+    "HouseStyle_1.5Unf": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.010771992818671455
+    },
+    "HouseStyle_1Story": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.49730700179533216
+    },
+    "HouseStyle_2.5Fin": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590664272890485
+    },
+    "HouseStyle_2.5Unf": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.009874326750448833
+    },
+    "HouseStyle_2Story": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.3052064631956912
+    },
+    "HouseStyle_SFoyer": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.025134649910233394
+    },
+    "HouseStyle_SLvl": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.04578096947935368
+    },
+    "RoofStyle_Gable": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.7899461400359067
+    },
+    "RoofStyle_Gambrel": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.00807899461400359
+    },
+    "RoofStyle_Hip": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.19030520646319568
+    },
+    "RoofStyle_Mansard": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.004488330341113106
+    },
+    "RoofStyle_Shed": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "RoofMatl_Roll": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "RoofMatl_Tar&Grv": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.005385996409335727
+    },
+    "RoofMatl_WdShake": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0017953321364452424
+    },
+    "RoofMatl_WdShngl": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "Exterior1st_AsphShn": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "Exterior1st_BrkComm": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0017953321364452424
+    },
+    "Exterior1st_BrkFace": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.03052064631956912
+    },
+    "Exterior1st_CBlock": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "Exterior1st_CemntBd": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.03680430879712747
+    },
+    "Exterior1st_HdBoard": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.15170556552962297
+    },
+    "Exterior1st_ImStucc": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "Exterior1st_MetalSd": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.1526032315978456
+    },
+    "Exterior1st_Plywood": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.06552962298025135
+    },
+    "Exterior1st_Stone": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "Exterior1st_Stucco": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.01615798922800718
+    },
+    "Exterior1st_VinylSd": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.36983842010771995
+    },
+    "Exterior1st_Wd Sdng": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.14093357271095153
+    },
+    "Exterior1st_WdShing": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.01615798922800718
+    },
+    "Exterior2nd_AsphShn": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0026929982046678637
+    },
+    "Exterior2nd_Brk Cmn": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.005385996409335727
+    },
+    "Exterior2nd_BrkFace": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.010771992818671455
+    },
+    "Exterior2nd_CBlock": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "Exterior2nd_CmentBd": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.03680430879712747
+    },
+    "Exterior2nd_HdBoard": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.1400359066427289
+    },
+    "Exterior2nd_ImStucc": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.004488330341113106
+    },
+    "Exterior2nd_MetalSd": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.14542190305206462
+    },
+    "Exterior2nd_Other": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "Exterior2nd_Plywood": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.08976660682226212
+    },
+    "Exterior2nd_Stone": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0026929982046678637
+    },
+    "Exterior2nd_Stucco": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.017055655296229804
+    },
+    "Exterior2nd_VinylSd": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.3608617594254937
+    },
+    "Exterior2nd_Wd Sdng": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.13824057450628366
+    },
+    "Exterior2nd_Wd Shng": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.02872531418312388
+    },
+    "MasVnrType_BrkFace": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.900359066427289
+    },
+    "MasVnrType_Stone": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.08976660682226212
+    },
+    "Foundation_CBlock": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.43177737881508077
+    },
+    "Foundation_PConc": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.4452423698384201
+    },
+    "Foundation_Slab": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.017055655296229804
+    },
+    "Foundation_Stone": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.004488330341113106
+    },
+    "Foundation_Wood": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0026929982046678637
+    },
+    "Heating_GasA": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.9766606822262118
+    },
+    "Heating_GasW": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.011669658886894075
+    },
+    "Heating_Grav": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.005385996409335727
+    },
+    "Heating_OthW": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0017953321364452424
+    },
+    "Heating_Wall": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590664272890485
+    },
+    "CentralAir_Y": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.926391382405745
+    },
+    "Electrical_FuseF": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.02154398563734291
+    },
+    "Electrical_FuseP": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0026929982046678637
+    },
+    "Electrical_SBrkr": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.9156193895870736
+    },
+    "Functional_Maj2": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590664272890485
+    },
+    "Functional_Min1": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.02244165170556553
+    },
+    "Functional_Min2": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.025134649910233394
+    },
+    "Functional_Mod": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.010771992818671455
+    },
+    "Functional_Sev": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0008976660682226212
+    },
+    "Functional_Typ": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.9290843806104129
+    },
+    "GarageType_Attchd": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.6463195691202872
+    },
+    "GarageType_Basment": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.012567324955116697
+    },
+    "GarageType_BuiltIn": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.06014362657091562
+    },
+    "GarageType_CarPort": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0062836624775583485
+    },
+    "GarageType_Detchd": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.2710951526032316
+    },
+    "GarageFinish_RFn": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.29533213644524237
+    },
+    "GarageFinish_Unf": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.4703770197486535
+    },
+    "PavedDrive_P": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.019748653500897665
+    },
+    "PavedDrive_Y": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.9201077199281867
+    },
+    "SaleType_CWD": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590664272890485
+    },
+    "SaleType_Con": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0017953321364452424
+    },
+    "SaleType_ConLD": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0062836624775583485
+    },
+    "SaleType_ConLI": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590664272890485
+    },
+    "SaleType_ConLw": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590664272890485
+    },
+    "SaleType_New": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.08168761220825853
+    },
+    "SaleType_Oth": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0017953321364452424
+    },
+    "SaleType_WD": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.8662477558348295
+    },
+    "SaleCondition_AdjLand": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590664272890485
+    },
+    "SaleCondition_Alloca": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.005385996409335727
+    },
+    "SaleCondition_Family": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.01615798922800718
+    },
+    "SaleCondition_Normal": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.8276481149012568
+    },
+    "SaleCondition_Partial": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.08258527827648116
+    }
+  },
+  "raw_ranges": {
+    "MSSubClass": {
+      "min": 20.0,
+      "max": 190.0,
+      "median": 50.0,
+      "mean": 57.01526032315979
+    },
+    "GrLivArea": {
+      "min": 334.0,
+      "max": 3082.0,
+      "median": 1443.5,
+      "mean": 1486.4640933572712
+    },
+    "LotArea": {
+      "min": 1300.0,
+      "max": 19900.0,
+      "median": 9444.5,
+      "mean": 9390.744165170556
+    },
+    "OverallQual": {
+      "min": 1.0,
+      "max": 10.0,
+      "median": 6.0,
+      "mean": 6.087073608617594
+    },
+    "YearBuilt": {
+      "min": 1872.0,
+      "max": 2010.0,
+      "median": 1972.5,
+      "mean": 1971.193895870736
+    },
+    "BedroomAbvGr": {
+      "min": 0.0,
+      "max": 6.0,
+      "median": 3.0,
+      "mean": 2.86983842010772
+    },
+    "FullBath": {
+      "min": 0.0,
+      "max": 3.0,
+      "median": 2.0,
+      "mean": 1.5610412926391382
+    },
+    "GarageCars": {
+      "min": 0.0,
+      "max": 4.0,
+      "median": 2.0,
+      "mean": 1.7576301615798924
+    }
+  },
+  "neighborhood_median_price": {
+    "Blmngtn": 181000.0,
+    "Blueste": 124000.0,
+    "BrDale": 100000.0,
+    "BrkSide": 119500.0,
+    "ClearCr": 196000.0,
+    "CollgCr": 200500.0,
+    "Crawfor": 189950.0,
+    "Edwards": 119500.0,
+    "Gilbert": 184000.0,
+    "IDOTRR": 108950.0,
+    "MeadowV": 89500.0,
+    "Mitchel": 160000.0,
+    "NAmes": 142000.0,
+    "NPkVill": 147000.0,
+    "NWAmes": 181000.0,
+    "NoRidge": 275500.0,
+    "NridgHt": 309000.0,
+    "OldTown": 122500.0,
+    "SWISU": 138475.0,
+    "Sawyer": 134950.0,
+    "SawyerW": 179200.0,
+    "Somerst": 226350.0,
+    "StoneBr": 278000.0,
+    "Timber": 224500.0,
+    "Veenker": 231750.0
+  },
+  "ui": {
+    "neighborhoods": [
+      {
+        "valor": "Blmngtn",
+        "etiqueta": "Bloomington Heights (norte, promoción reciente)"
+      },
+      {
+        "valor": "Blueste",
+        "etiqueta": "Bluestem (norte, promoción pequeña)"
+      },
+      {
+        "valor": "BrDale",
+        "etiqueta": "Briardale (norte, adosados años 70)"
+      },
+      {
+        "valor": "BrkSide",
+        "etiqueta": "Brookside (oeste, casas antiguas junto al arroyo)"
+      },
+      {
+        "valor": "ClearCr",
+        "etiqueta": "Clear Creek (sur, zona residencial valorada)"
+      },
+      {
+        "valor": "CollgCr",
+        "etiqueta": "College Creek (oeste, junto al campus)"
+      },
+      {
+        "valor": "Crawfor",
+        "etiqueta": "Crawford (oeste, barrio consolidado)"
+      },
+      {
+        "valor": "Edwards",
+        "etiqueta": "Edwards (oeste, el más económico y numeroso)"
+      },
+      {
+        "valor": "Gilbert",
+        "etiqueta": "Gilbert (norte, urbanización de los 90)"
+      },
+      {
+        "valor": "IDOTRR",
+        "etiqueta": "Iowa DOT and Rail Road (céntrico, junto al ferrocarril)"
+      },
+      {
+        "valor": "MeadowV",
+        "etiqueta": "Meadow Village (norte, el más barato del dataset)"
+      },
+      {
+        "valor": "Mitchel",
+        "etiqueta": "Mitchell (norte, vivienda unifamiliar estándar)"
+      },
+      {
+        "valor": "NAmes",
+        "etiqueta": "North Ames (norte, el más numeroso del dataset)"
+      },
+      {
+        "valor": "NPkVill",
+        "etiqueta": "Northpark Villa (norte, adosados)"
+      },
+      {
+        "valor": "NWAmes",
+        "etiqueta": "Northwest Ames (noroeste, residencial tranquilo)"
+      },
+      {
+        "valor": "NoRidge",
+        "etiqueta": "Northridge (norte, casas grandes de gama alta)"
+      },
+      {
+        "valor": "NridgHt",
+        "etiqueta": "Northridge Heights (norte, la zona más cara)"
+      },
+      {
+        "valor": "OldTown",
+        "etiqueta": "Old Town (centro histórico, casas antiguas)"
+      },
+      {
+        "valor": "SWISU",
+        "etiqueta": "South & West of ISU (sur del campus universitario)"
+      },
+      {
+        "valor": "Sawyer",
+        "etiqueta": "Sawyer (oeste, junto a la vía del tren)"
+      },
+      {
+        "valor": "SawyerW",
+        "etiqueta": "Sawyer West (oeste, mejor valorado que Sawyer)"
+      },
+      {
+        "valor": "Somerst",
+        "etiqueta": "Somerset (norte, familiar de gama media-alta)"
+      },
+      {
+        "valor": "StoneBr",
+        "etiqueta": "Stone Brook (norte, gama alta)"
+      },
+      {
+        "valor": "Timber",
+        "etiqueta": "Timberland (suroeste, gama alta junto al bosque)"
+      },
+      {
+        "valor": "Veenker",
+        "etiqueta": "Veenker (norte, junto al campo de golf)"
+      }
+    ],
+    "ms_subclass": [
+      {
+        "valor": 20,
+        "etiqueta": "Una planta, construida en 1946 o después"
+      },
+      {
+        "valor": 30,
+        "etiqueta": "Una planta, construida antes de 1946"
+      },
+      {
+        "valor": 40,
+        "etiqueta": "Una planta con buhardilla habitable"
+      },
+      {
+        "valor": 45,
+        "etiqueta": "Planta y media, buhardilla sin terminar"
+      },
+      {
+        "valor": 50,
+        "etiqueta": "Planta y media, buhardilla terminada"
+      },
+      {
+        "valor": 60,
+        "etiqueta": "Dos plantas, construida en 1946 o después"
+      },
+      {
+        "valor": 70,
+        "etiqueta": "Dos plantas, construida antes de 1946"
+      },
+      {
+        "valor": 75,
+        "etiqueta": "Dos plantas y media"
+      },
+      {
+        "valor": 80,
+        "etiqueta": "Niveles partidos o multinivel"
+      },
+      {
+        "valor": 85,
+        "etiqueta": "Split foyer (entrada a media altura)"
+      },
+      {
+        "valor": 90,
+        "etiqueta": "Dúplex"
+      },
+      {
+        "valor": 120,
+        "etiqueta": "Una planta en urbanización planificada (PUD), 1946+"
+      },
+      {
+        "valor": 160,
+        "etiqueta": "Dos plantas en urbanización planificada (PUD), 1946+"
+      },
+      {
+        "valor": 180,
+        "etiqueta": "Multinivel en urbanización planificada (PUD)"
+      },
+      {
+        "valor": 190,
+        "etiqueta": "Vivienda convertida en dos familias"
+      }
+    ]
+  }
+}

@@ -1,0 +1,127 @@
+# ============================================
+# DOCKER COMPOSE — PREDICTOR DE VIVIENDAS (AMES)
+# ============================================
+# Orquesta dos contenedores:
+#   1. api       -> FastAPI + modelo de Machine Learning
+#   2. frontend  -> HTML + CSS + JS servidos por nginx
+#
+# Arrancar:  docker compose up -d --build
+# Parar:     docker compose down
+#
+# NOTA: el atributo `version` se ha eliminado porque está obsoleto en Compose v2
+# (avisaba con "the attribute `version` is obsolete, it will be ignored").
+
+# ============================================
+# SERVICIOS (Contenedores)
+# ============================================
+services:
+
+  # ============================================
+  # SERVICIO 1: API
+  # ============================================
+  api:
+    # Construir la imagen usando el Dockerfile
+    build: .
+    
+    # Nombre del contenedor (para identificarlo fácilmente)
+    container_name: predicc_api
+    
+    # Puertos: [puerto_host]:[puerto_contenedor]
+    ports:
+      - "8000:8000"
+    
+    # Volúmenes: montar carpetas del host al contenedor
+    volumes:
+      # Montar modelos para actualizarlos sin reconstruir
+      - ./models_saved:/app/models_saved
+      # Montar archivo .env
+      - ./.env:/app/.env
+      # Base de datos PERSISTENTE.
+      # Sin esto la BD vivía en la capa de escritura del contenedor y cada
+      # `docker compose up --build` arrancaba con las tablas vacías: se perdían
+      # usuarios, productos y todo el historial de predicciones.
+      # Se usa un volumen con nombre (y no `./app.db:/app/app.db`) porque un
+      # bind-mount de un solo fichero crea un DIRECTORIO si el fichero no existe
+      # en el host, y además el bloqueo de SQLite es menos fiable en Windows.
+      - predicc_db:/app/data
+    
+    # Variables de entorno
+    environment:
+      - ENVIRONMENT=development
+      # La BD vive en el volumen persistente `predicc_db`
+      - DATABASE_URL=sqlite:///./data/app.db
+      - MODEL_PATH=models_saved/RandomForest_Tuned.pkl
+      - SCALER_PATH=models_saved/scaler.pkl
+      - FEATURES_PATH=models_saved/feature_names.txt
+    
+    # Reiniciar automáticamente si falla
+    restart: unless-stopped
+
+    # Comprobación de salud: /health devuelve "degraded" si faltan tablas o no
+    # hay conexión a la base de datos, así que este healthcheck detecta el fallo
+    # silencioso que tenía el proyecto (contenedor "sano" sin tablas).
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=4).status == 200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+    
+    # Red a la que pertenece
+    networks:
+      - predicc_network
+
+  # ============================================
+  # SERVICIO 2: FRONTEND
+  # ============================================
+  frontend:
+    # Usar una imagen ligera de nginx (servidor web)
+    image: nginx:alpine
+    
+    # Nombre del contenedor
+    container_name: predicc_frontend
+    
+    # Puertos: [puerto_host]:[puerto_contenedor]
+    ports:
+      - "5500:80"
+    
+    # Volúmenes: montar los archivos del frontend
+    volumes:
+      # Los archivos HTML/CSS/JS van a la carpeta de nginx
+      - ./frontend:/usr/share/nginx/html
+    
+    # Reiniciar automáticamente si falla
+    restart: unless-stopped
+    
+    # Red a la que pertenece
+    networks:
+      - predicc_network
+    
+    # Dependencias: no arrancar hasta que la API esté REALMENTE sana.
+    # Antes era `depends_on: [api]` sin condición, que solo espera a que el
+    # contenedor exista, no a que la API responda.
+    depends_on:
+      api:
+        condition: service_healthy
+
+# ============================================
+# REDES
+# ============================================
+# Crear una red para que los contenedores se comuniquen
+networks:
+  predicc_network:
+    driver: bridge
+
+# ============================================
+# VOLÚMENES
+# ============================================
+# Volumen gestionado por Docker donde vive la base de datos SQLite. Persiste
+# entre reconstrucciones e imágenes nuevas (`docker compose up --build`).
+#
+# Para inspeccionarlo:
+#   docker volume inspect predicc_viviendas_predicc_db
+# Para hacer una copia de seguridad de la BD:
+#   docker run --rm -v predicc_viviendas_predicc_db:/data -v "%cd%":/backup \
+#     alpine cp /data/app.db /backup/app.db.backup
+volumes:
+  predicc_db:

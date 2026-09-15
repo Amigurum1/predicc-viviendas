@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🏠 Predictor de Precios de Viviendas</title>
+
+    <!-- URL de la API. Cambiar aquí para desplegar en otro host o puerto, sin
+         tocar el JavaScript. Si se omite, se usa http://localhost:8000/api. -->
+    <meta name="api-url" content="http://localhost:8000/api" />
+
+    <!-- Leaflet CSS (para el mapa) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="app">
+        <!-- Botón del menú (solo visible en móvil).
+             El CSS ya ocultaba el sidebar por debajo de 768 px y esperaba este
+             botón, pero el botón no existía: en un móvil la aplicación se
+             quedaba sin navegación. -->
+        <button class="menu-toggle" id="menu-toggle" type="button"
+                aria-label="Abrir el menú de navegación"
+                aria-controls="sidebar" aria-expanded="false">
+            <span aria-hidden="true">☰</span>
+        </button>
+
+        <!-- Fondo oscuro que cierra el menú al tocar fuera -->
+        <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">🏠</div>
+                <div>
+                    <h1>Predictor</h1>
+                    <span class="brand-subtitle">Viviendas</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-section="predict">
+                    <span class="nav-icon">🔮</span>
+                    <span>Predecir</span>
+                </button>
+                <button class="nav-item" data-section="history">
+                    <span class="nav-icon">📊</span>
+                    <span>Historial</span>
+                </button>
+                <button class="nav-item" data-section="dashboard">
+                    <span class="nav-icon">📈</span>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-item" data-section="map">
+                    <span class="nav-icon">📍</span>
+                    <span>Mapa</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info" id="user-info">
+                    <span class="user-avatar">👤</span>
+                    <div>
+                        <div class="user-name" id="user-name">Invitado</div>
+                        <div class="user-email" id="user-email">No autenticado</div>
+                    </div>
+                </div>
+                <button class="btn btn-logout" id="logout-btn" style="display:none" onclick="logout()">
+                    <span>🚪</span> Cerrar sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- ============================================ -->
+            <!-- SECCIÓN: PREDECIR -->
+            <!-- ============================================ -->
+            <section id="section-predict" class="section active">
+                <div class="section-header">
+                    <h2>🔮 Predecir Precio</h2>
+                    <p>Ingresa las características de la propiedad para obtener una estimación</p>
+                </div>
+
+                <!-- Auth Status -->
+                <div id="auth-status" class="auth-status" role="status" aria-live="polite">
+                    <span id="auth-message">No has iniciado sesión</span>
+                </div>
+
+                <!-- Auth Forms -->
+                <div id="auth-forms" class="auth-forms">
+                    <div class="auth-card">
+                        <h3>Iniciar Sesión</h3>
+                        <form id="login-form">
+                            <div class="form-group">
+                                <label for="login-email">Email</label>
+                                <input type="email" id="login-email" placeholder="tu@email.com" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password">Contraseña</label>
+                                <input type="password" id="login-password" placeholder="••••••••" required />
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+                        </form>
+                    </div>
+                    <div class="auth-card">
+                        <h3>Registrarse</h3>
+                        <form id="register-form">
+                            <div class="form-group">
+                                <label for="register-email">Email</label>
+                                <input type="email" id="register-email" placeholder="tu@email.com" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="register-username">Usuario</label>
+                                <input type="text" id="register-username" placeholder="usuario" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="register-password">Contraseña</label>
+                                <input type="password" id="register-password" placeholder="••••••••"
+                                       minlength="8" required
+                                       aria-describedby="register-password-hint" />
+                                <small class="field-hint" id="register-password-hint">
+                                    Mínimo 8 caracteres, con mayúscula, minúscula, número y
+                                    un carácter especial (por ejemplo <code>Test123!@#</code>).
+                                </small>
+                            </div>
+                            <div class="form-row-2">
+                                <div class="form-group">
+                                    <label for="register-firstname">Nombre</label>
+                                    <input type="text" id="register-firstname" placeholder="Juan" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-lastname">Apellido</label>
+                                    <input type="text" id="register-lastname" placeholder="Perez" />
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-secondary btn-block">Registrarse</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Prediction Form -->
+                <div id="prediction-form-container" style="display:none;">
+                    <form id="prediction-form" class="prediction-form">
+                        <div class="dataset-notice">
+                            <span class="icon">ℹ️</span>
+                            <span>
+                                Este modelo está entrenado con el dataset
+                                <strong>Ames Housing (Iowa, EE. UU.)</strong>, así que los
+                                barrios y los precios son estadounidenses y la moneda es
+                                el <strong>dólar ($)</strong>. Las características que no
+                                rellenes se completan con la vivienda mediana del dataset.
+                            </span>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="neighborhood">🏘️ Barrio de Ames</label>
+                                <select id="neighborhood" required>
+                                    <option value="">— Cargando barrios… —</option>
+                                </select>
+                                <small class="field-hint" id="neighborhood-hint"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="ms_subclass">🏗️ Tipo de vivienda</label>
+                                <select id="ms_subclass" required>
+                                    <option value="">— Cargando tipos… —</option>
+                                </select>
+                                <small class="field-hint" id="ms_subclass-hint"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="gr_liv_area_m2">📐 Superficie habitable (m²)</label>
+                                <input type="number" id="gr_liv_area_m2" min="31" max="277"
+                                       step="1" value="136" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="lot_area_m2">🗺️ Superficie de la parcela (m²)</label>
+                                <input type="number" id="lot_area_m2" min="121" max="1829"
+                                       step="1" value="880" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="overall_qual">⭐ Calidad general (1-10)</label>
+                                <input type="number" id="overall_qual" min="1" max="10"
+                                       step="1" value="6" required />
+                                <small class="field-hint">1 = muy deficiente · 10 = excelente</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="year_built">📅 Año de construcción</label>
+                                <input type="number" id="year_built" min="1872" max="2008"
+                                       step="1" value="1973" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="bedrooms">🛏️ Dormitorios</label>
+                                <input type="number" id="bedrooms" min="0" max="6"
+                                       step="1" value="3" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="bathrooms">🚿 Baños completos</label>
+                                <input type="number" id="bathrooms" min="0" max="3"
+                                       step="1" value="2" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="garage_cars">🚗 Plazas de garaje</label>
+                                <input type="number" id="garage_cars" min="0" max="4"
+                                       step="1" value="2" required />
+                            </div>
+                        </div>
+
+                        <!-- Mapa interactivo (solo referencia visual) -->
+                        <div class="map-form-container">
+                            <div class="map-instructions">
+                                <span class="icon">📍</span>
+                                <span>
+                                    Opcional: marca un punto en el mapa de Ames como
+                                    referencia. <strong>No influye en el precio</strong>;
+                                    el modelo usa el barrio del desplegable.
+                                </span>
+                            </div>
+                            <div id="map-picker"></div>
+                            <div class="coordinates-display">
+                                <div class="coord-item">
+                                    <span class="label">Latitud:</span>
+                                    <span class="value" id="latitude-display">42.0308</span>
+                                </div>
+                                <div class="coord-item">
+                                    <span class="label">Longitud:</span>
+                                    <span class="value" id="longitude-display">-93.6319</span>
+                                </div>
+                            </div>
+                            <div class="address-display" id="address-display">
+                                <span>📍</span>
+                                <span id="address-text">Haz clic en el mapa para marcar una referencia</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-predict btn-block" id="predict-btn">
+                            <span>🔮</span> Predecir Precio
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Resultado -->
+                <div id="result-container" style="display:none;">
+                    <div class="result-card">
+                        <div class="result-header">
+                            <h3>💰 Precio Estimado</h3>
+                            <button class="btn btn-close-result" onclick="clearResult()" aria-label="Cerrar el resultado">✕</button>
+                        </div>
+                        <div class="result-price" id="predicted-price">$ 0</div>
+                        <div class="result-confidence">
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" id="confidence-fill" style="width:0%"></div>
+                            </div>
+                            <span>Confianza: <strong id="confidence">0%</strong></span>
+                        </div>
+                        <div class="result-details" id="result-details"></div>
+                        <div class="result-actions">
+                            <button class="btn btn-secondary btn-sm" onclick="exportPDF()">📄 Exportar PDF</button>
+                            <button class="btn btn-secondary btn-sm" onclick="showOnMap()">📍 Ver en mapa</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mapa de resultados -->
+                <div id="result-map-container" style="display:none;">
+                    <div id="result-map" style="height:200px; border-radius:var(--radius); border:1px solid var(--light-gray);"></div>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- SECCIÓN: HISTORIAL -->
+            <!-- ============================================ -->
+            <section id="section-history" class="section">
+                <div class="section-header">
+                    <h2>📊 Historial de Predicciones</h2>
+                    <p>Todas tus predicciones guardadas</p>
+                </div>
+                <div id="history-container">
+                    <div class="loading">⏳ Cargando historial...</div>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- SECCIÓN: DASHBOARD -->
+            <!-- ============================================ -->
+            <section id="section-dashboard" class="section">
+                <div class="section-header">
+                    <h2>📈 Dashboard de Estadísticas</h2>
+                    <p>Resumen de tus predicciones</p>
+                </div>
+
+                <!-- Tarjetas de estadísticas -->
+                <div class="stats-grid" id="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-value" id="stat-total">0</div>
+                        <div class="stat-label">Total predicciones</div>
+                    </div>
+                    <div class="stat-card stat-card-primary">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-value" id="stat-avg-price">$ 0</div>
+                        <div class="stat-label">Precio promedio</div>
+                    </div>
+                    <div class="stat-card stat-card-success">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-value" id="stat-max-price">$ 0</div>
+                        <div class="stat-label">Precio máximo</div>
+                    </div>
+                    <div class="stat-card stat-card-warning">
+                        <div class="stat-icon">📉</div>
+                        <div class="stat-value" id="stat-min-price">$ 0</div>
+                        <div class="stat-label">Precio mínimo</div>
+                    </div>
+                </div>
+
+                <!-- Gráficos -->
+                <div class="chart-container">
+                    <h4>📈 Evolución de precios</h4>
+                    <canvas id="history-chart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h4>🏘️ Precio promedio por barrio (Ames)</h4>
+                    <canvas id="district-chart"></canvas>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- SECCIÓN: MAPA -->
+            <!-- ============================================ -->
+            <section id="section-map" class="section">
+                <div class="section-header">
+                    <h2>📍 Mapa de Propiedades</h2>
+                    <p>Visualiza las ubicaciones de las propiedades</p>
+                </div>
+                <div id="map-container"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Librerías externas.
+         Las versiones van FIJADAS: antes Chart.js se cargaba sin versión
+         ("/npm/chart.js"), así que una actualización de la librería podía romper
+         los gráficos sin que nadie hubiera tocado el código.
+         Cada una se comprueba al arrancar (ver la función
+         comprobarDependencias en script.js): si un CDN falla, se avisa en vez de
+         dejar la aplicación a medias sin explicación. -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- Scripts del frontend -->
+    <script src="script.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="map.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+# ============================================
+# DEPENDENCIAS DE RUNTIME
+# ============================================
+# Es el entorno CANÓNICO del proyecto: estas son las versiones con las que se
+# generaron los artefactos de models_saved/ y las que usa la imagen Docker.
+#
+# Para desarrollo (tests, notebooks, EDA) usa requirements-dev.txt.
+#
+# Las versiones están fijadas a propósito: los .pkl se serializaron con
+# scikit-learn 1.5.0 y cargarlos con otra versión produce un
+# InconsistentVersionWarning (sklearn avisa de que los resultados podrían no ser
+# válidos). Ver scripts/check_artifacts.py.
+
+# Framework principal
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# Base de datos
+# Nota: no se usa alembic. Estaba declarado pero no hay alembic.ini ni
+# migraciones, así que se ha retirado. Si algún día se necesita evolucionar el
+# esquema sin perder datos, habría que añadirlo y crear las migraciones.
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+
+# Validación y serialización
+pydantic==2.5.0
+pydantic-settings==2.1.0
+email-validator==2.1.0
+
+# Autenticación y seguridad
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==3.2.0
+python-multipart==0.0.6
+
+# Variables de entorno
+python-dotenv==1.0.0
+
+# Machine Learning
+scikit-learn==1.5.0
+joblib==1.4.2
+numpy==1.26.4
+pandas==2.2.2

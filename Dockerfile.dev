@@ -1,0 +1,33 @@
+# ============================================
+# IMAGEN DE DESARROLLO Y PRUEBAS
+# ============================================
+# La imagen de producción (Dockerfile) NO incluye pytest, httpx, matplotlib,
+# seaborn ni xgboost: son herramientas de desarrollo y engordaban el runtime.
+#
+# Como los tests sí deben poder ejecutarse con las versiones canónicas
+# (las de requirements.txt), esta imagen parte de la de producción y añade
+# requirements-dev.txt.
+#
+# Construir y ejecutar la suite:
+#
+#   docker build -f Dockerfile.dev -t predicc_viviendas-dev .
+#   docker run --rm -v "$PWD:/app" -w /app predicc_viviendas-dev \
+#       python -m pytest tests -q
+#
+# En Windows (PowerShell):
+#   docker run --rm -v "${PWD}:/app" -w /app predicc_viviendas-dev `
+#       python -m pytest tests -q
+#
+# Hay que montar el proyecto porque .dockerignore deja fuera tests/ y data/.
+
+ARG BASE_IMAGE=predicc_viviendas-api:latest
+FROM ${BASE_IMAGE}
+
+# Se instala como root y luego se vuelve al usuario sin privilegios.
+USER root
+
+COPY requirements-dev.txt .
+
+RUN pip install --no-cache-dir -r requirements-dev.txt
+
+USER appuser

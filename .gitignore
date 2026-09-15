@@ -1,0 +1,88 @@
+# ============================================
+# PYTHON
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ============================================
+# ENTORNOS VIRTUALES
+# ============================================
+venv/
+env/
+.venv/
+ENV/
+
+# ============================================
+# SECRETOS Y CONFIGURACIÓN LOCAL
+# ============================================
+# El .env contiene la SECRET_KEY y la configuración local: NUNCA se sube.
+# Hay una plantilla en .env.example.
+.env
+.env.local
+.env.*.local
+
+# ============================================
+# BASES DE DATOS
+# ============================================
+*.db
+*.sqlite
+*.sqlite3
+# Copias de seguridad creadas por scripts/reset_predictions_table.py
+*.backup_*.db
+
+# ============================================
+# PRUEBAS Y COBERTURA
+# ============================================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+# Volcados de salida de pytest: son artefactos, no código
+test_*_output.txt
+test_*_errors.txt
+
+# ============================================
+# LOGS
+# ============================================
+*.log
+logs/
+
+# ============================================
+# ARTEFACTOS DE MODELO
+# ============================================
+# Son binarios grandes (18 MB). Si prefieres versionarlos, comenta estas líneas.
+# Se regeneran con: python src/models/train_model.py
+*.pkl
+# El contrato es pequeño y conviene versionarlo para que la API arranque,
+# pero se regenera igual que los modelos. Descomenta si lo quieres fuera.
+# models_saved/feature_contract.json
+
+# ============================================
+# DATOS
+# ============================================
+# Los CSV procesados se regeneran con: python src/data/make_dataset.py
+# data/processed/
+# data/raw/ se versiona: es la fuente de todo el pipeline.
+
+# ============================================
+# EDITORES Y SISTEMA
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ============================================
+# NOTEBOOKS
+# ============================================
+.ipynb_checkpoints/
