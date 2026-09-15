@@ -179,7 +179,7 @@ curl -X POST http://localhost:8000/api/predictions/ \
 ## Pruebas
 
 ```bash
-python -m pytest                      # 215 pruebas
+python -m pytest                      # 224 pruebas
 ```
 
 En el entorno canónico (mismas versiones que producción):
@@ -194,11 +194,34 @@ consistencia train/serve, la paginación, el aislamiento de datos entre usuarios
 la política de contraseñas, el límite de peticiones y la coherencia entre el
 HTML y el JavaScript del frontend.
 
+### Integración continua
+
+`.github/workflows/ci.yml` se ejecuta en cada `push` a `main`, en cada pull
+request y a mano (`workflow_dispatch`). Hace, en este orden:
+
+1. Instala `requirements-dev.txt` sobre Python 3.12 en una máquina limpia.
+2. Regenera los artefactos: `python src/models/train_model.py`.
+3. Comprueba artefactos y contrato: `python scripts/check_artifacts.py`.
+4. Lanza la suite: `python -m pytest`.
+
+El entrenamiento va **antes** de las pruebas a propósito. Los `.pkl` de
+`models_saved/` no están versionados (son binarios de varios MB), así que en un
+clon recién hecho no existen y 13 pruebas fallan al cargar el modelo. Una vez
+entrenado, el clon pasa las 224.
+
+El flujo define `ENVIRONMENT=testing` y una `SECRET_KEY` de usar y tirar: el
+`.env` real no se versiona, y con los valores por defecto la configuración
+avisaría de un secreto de ejemplo.
+
+Lo que la CI **no** comprueba: el frontend en un navegador real (solo hay
+comprobaciones estáticas de HTML y JavaScript) ni la imagen Docker.
+
 ---
 
 ## Estructura
 
 ```
+├── .github/workflows/        CI (pruebas en cada push y pull request)
 ├── api/                      API REST
 │   ├── config.py             configuración por entorno
 │   ├── database.py           conexión y ciclo de vida de la base de datos

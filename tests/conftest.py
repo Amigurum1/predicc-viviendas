@@ -35,7 +35,26 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # ya definida gana sobre el `.env`: basta con fijarla aquí.
 _DIRECTORIO_TESTS = tempfile.mkdtemp(prefix='predicc_tests_')
 os.environ['DATABASE_URL'] = f"sqlite:///{os.path.join(_DIRECTORIO_TESTS, 'test.db')}"
-atexit.register(shutil.rmtree, _DIRECTORIO_TESTS, ignore_errors=True)
+
+
+def _limpiar_directorio_temporal():
+    """
+    Borra el directorio temporal al terminar la sesión de pytest.
+
+    En Windows hay que soltar antes la conexión: si el motor sigue abierto,
+    el fichero .db está bloqueado, `shutil.rmtree` falla y —como se le pasa
+    `ignore_errors=True`— la suite termina bien pero deja un directorio
+    `predicc_tests_*` en %TEMP% por cada ejecución.
+    """
+    try:
+        from api.database import engine
+        engine.dispose()
+    except Exception:
+        pass
+    shutil.rmtree(_DIRECTORIO_TESTS, ignore_errors=True)
+
+
+atexit.register(_limpiar_directorio_temporal)
 
 # ============================================================
 # SALIDA EN UTF-8
